@@ -1,0 +1,43 @@
+### Here is where the containers are going to be defined, attacker container, server, firewall.
+### And the network topology so the network design is clear to docker
+
+# All the continers are going to be here (firewall, server, attacker). Also it specifies the privliges they have
+services:
+  firewall:
+    build: ./firewall
+    container_name: lab-firewall
+    cap_add:
+      - NET_ADMIN              # allows editing firewall rules and routing
+      - NET_RAW                # allow sending raw packets later
+    sysctls:
+      - net.ipv4.ip_forward=1  # enable packet forwarding
+    networks:
+      external_net:
+        ipv4_address: 192.168.10.2
+      internal_net:
+        ipv4_address: 192.168.20.2
+
+  server:
+    build: ./server
+    container_name: lab-server
+    networks:
+      internal_net:
+        ipv4_address: 192.168.20.10
+
+
+# Network design is here. there is only two netwroks
+networks:
+  external_net:
+    driver: bridge # driver is the the virtual network docker make and driver is the type of the driver. here it's a switch that connects internally and externally
+    ipam:
+      config:
+        - subnet: 192.168.10.0/24
+          gateway: 192.168.10.1
+
+  internal_net:
+    driver: bridge
+    internal: true #now the bridge(switch) only connect internally 
+    ipam:
+      config:
+        - subnet: 192.168.20.0/24
+          gateway: 192.168.20.1
