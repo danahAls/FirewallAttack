@@ -7,6 +7,10 @@ RUN apt-get update && \
     iproute2 \
     iputils-ping \
     curl \
+    nmap \
+    tcpdump \
+    python3 \
+    python3-pip \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 

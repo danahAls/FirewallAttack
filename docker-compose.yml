@@ -20,6 +20,9 @@ services:
   server:
     build: ./server
     container_name: lab-server
+    command: ["sh", "-c", "ip route replace 192.168.10.0/24 via 192.168.20.2 && exec python app.py"]
+    cap_add:
+      - NET_ADMIN
     networks:
       internal_net:
         ipv4_address: 192.168.20.10
@@ -31,7 +34,7 @@ services:
 
     # Give the running container a recognizable name
     container_name: lab-attacker
-
+    command: ["sh", "-c", "ip route replace 192.168.20.0/24 via 192.168.10.2 && exec sleep infinity"]
     # Allow the container to configure its own network routes
     cap_add:
       - NET_ADMIN
