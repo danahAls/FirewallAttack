@@ -23,6 +23,28 @@ services:
     networks:
       internal_net:
         ipv4_address: 192.168.20.10
+  # Define the attacker container
+  attacker:
+
+    # Build the image using the Dockerfile in the attacker folder
+    build: ./attacker
+
+    # Give the running container a recognizable name
+    container_name: lab-attacker
+
+    # Allow the container to configure its own network routes
+    cap_add:
+      - NET_ADMIN
+
+    # Connect the attacker to the external network
+    networks:
+      external_net:
+
+        # Assign a fixed IP address to the attacker
+        ipv4_address: 192.168.10.3
+
+    # Keep the container running
+    command: ["sleep", "infinity"]
 
 
 # Network design is here. there is only two netwroks
