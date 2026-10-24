@@ -16,8 +16,11 @@ iptables -F
 iptables -X 2>/dev/null || true
  
 echo "[firewall] setting default policies..."
-iptables -P INPUT  ACCEPT       
+iptables -P INPUT DROP
 iptables -P OUTPUT ACCEPT
+
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -P FORWARD DROP         # block everything crossing unless a rule below allows it
  
 
