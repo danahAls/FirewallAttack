@@ -14,6 +14,7 @@ sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1 || \
 echo "[firewall] flushing any old rules..."
 iptables -F
 iptables -X 2>/dev/null || true
+iptables -t nat -F
  
 echo "[firewall] setting default policies..."
 iptables -P INPUT DROP
@@ -52,7 +53,14 @@ iptables -A FORWARD -d "$SERVER" -p icmp --icmp-type echo-request -j DROP
  
 
 
+iptables -A FORWARD -d "$SERVER" -p tcp --dport 22 -j ACCEPT
 iptables -A FORWARD -d "$SERVER" -p tcp --dport 80 -j ACCEPT
+
+# Keep the return path through the firewall on Docker Desktop and other
+# bridged setups that do not reliably route replies between Docker bridges.
+# Filtering still happens above; this only applies source NAT to permitted
+# external traffic headed to the protected server.
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -d "$SERVER" -o eth1 -j MASQUERADE
  
 # Everything else is dropped automatically by the FORWARD policy (DROP).
 

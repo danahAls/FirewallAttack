@@ -1,6 +1,7 @@
 FROM python:3.12-slim
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends iproute2 && \
+    apt-get install -y --no-install-recommends iproute2 openssh-server && \
+    mkdir -p /run/sshd && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

@@ -20,7 +20,7 @@ services:
   server:
     build: ./server
     container_name: lab-server
-    command: ["sh", "-c", "ip route replace 192.168.10.0/24 via 192.168.20.2 && exec python app.py"]
+    command: ["sh", "-c", "ip route replace 192.168.10.0/24 via 192.168.20.2 && ssh-keygen -A && /usr/sbin/sshd && exec python app.py"]
     cap_add:
       - NET_ADMIN
     networks:
@@ -45,10 +45,6 @@ services:
 
         # Assign a fixed IP address to the attacker
         ipv4_address: 192.168.10.3
-
-    # Keep the container running
-    command: ["sleep", "infinity"]
-
 
 # Network design is here. there is only two netwroks
 networks:
