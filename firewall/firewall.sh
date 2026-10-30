@@ -53,20 +53,20 @@ iptables -A FORWARD -d "$SERVER" -p icmp --icmp-type echo-request -j DROP
  
 
 
-iptables -A FORWARD -d "$SERVER" -p tcp --dport 22 -j ACCEPT
+# 5) The one public service: HTTP to the server.
 iptables -A FORWARD -d "$SERVER" -p tcp --dport 80 -j ACCEPT
+#  Rewrite the source of permitted external traffic to the firewall's
+#     internal address. Docker's isolation for internal networks drops
+#     packets with addresses outside 192.168.20.0/24, so without this the
+#     server's replies never return. Filtering above still sees the real source.
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -d "$SERVER" -j MASQUERADE
 
-# Keep the return path through the firewall on Docker Desktop and other
-# bridged setups that do not reliably route replies between Docker bridges.
-# Filtering still happens above; this only applies source NAT to permitted
-# external traffic headed to the protected server.
-iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -d "$SERVER" -o eth1 -j MASQUERADE
- 
-# Everything else is dropped automatically by the FORWARD policy (DROP).
+# 6) Monitoring API: only the dashboard (192.168.10.4) may read it.
+iptables -A INPUT -p tcp --dport 8080 -s 192.168.10.4 -j ACCEPT
 
-echo "[firewall] rules installed. Current FORWARD chain:" #Chacking if firewall rules are implemented and shows them
+echo "[firewall] rules installed. Current FORWARD chain:"
 iptables -S FORWARD
- 
-echo "[firewall] up and forwarding. Leaving container running." #Firewall is on a continer on it's own
-exec sleep infinity
- 
+
+# Start the monitoring and keep container running
+echo "[firewall] starting monitoring API on port 8080"
+exec python3 /usr/local/bin/monitor.py

@@ -45,6 +45,22 @@ services:
 
         # Assign a fixed IP address to the attacker
         ipv4_address: 192.168.10.3
+    # Visual interface: shows server status and firewall counters in a browser
+  dashboard:
+    build: ./dashboard
+    container_name: lab-dashboard
+    # Route to the server network goes through the firewall
+    command: ["sh", "-c", "ip route replace 192.168.20.0/24 via 192.168.10.2 && exec python app.py"]
+    cap_add:
+      - NET_ADMIN             
+    ports:
+      - "127.0.0.1:5000:5000"  # open browser at http://localhost:5000
+    networks:
+      external_net:
+        ipv4_address: 192.168.10.4   # the only IP the firewall lets read port 8080
+    depends_on:
+      - firewall
+
 
 # Network design is here. there is only two netwroks
 networks:

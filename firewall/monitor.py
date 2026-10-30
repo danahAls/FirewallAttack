@@ -21,6 +21,14 @@ def get_firewall_metrics():
     for line in result.stdout.splitlines():
         columns = line.split()
 
+#Count packets dropped by our defult rules, like 443
+        if line.startswith("Chain FORWARD") and "policy DROP" in line:
+            dropped += int(columns[4])
+            continue
+
+        if len(columns) < 3 or not columns[0].isdigit():
+            continue
+
         if len(columns) < 3 or not columns[0].isdigit():
             continue
 
