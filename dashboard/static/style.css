@@ -1,0 +1,371 @@
+/* ==========================================================
+   FIREWALL SECURITY MONITOR
+   Visual interface for monitoring firewall activity.
+   Theme: Black and red cybersecurity dashboard.
+   ========================================================== */
+
+
+/* Reset default browser spacing and simplify element sizing. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Define reusable colors to keep the dashboard consistent. */
+:root {
+    --background: #08090d;
+    --card: #121319;
+    --red: #e63946;
+    --text: #f4f4f6;
+    --muted: #9a9ca8;
+    --border: #30232b;
+    --green: #32d296;
+    --orange: #ffb454;
+}
+
+
+/* Set the main page appearance. */
+body {
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   1. HEADER
+   ========================================================== */
+
+/* Display the dashboard title and description. */
+header {
+    position: relative;
+    padding: 35px 7%;
+    background: #130e13;
+    border-bottom: 1px solid var(--red);
+    overflow: hidden;
+}
+
+
+/* Add a subtle animated scanning line. */
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 40%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--red),
+        transparent
+    );
+    animation: scan 5s linear infinite;
+}
+
+
+/* Style the dashboard title. */
+header h1 {
+    position: relative;
+    width: fit-content;
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+/* Create a brief glitch effect without affecting readability. */
+header h1::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: var(--red);
+    opacity: 0;
+    pointer-events: none;
+    animation: glitch 8s infinite;
+}
+
+
+/* Style the dashboard subtitle. */
+header p {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   2. MAIN DASHBOARD
+   ========================================================== */
+
+/* Arrange dashboard sections vertically with consistent spacing. */
+main {
+    width: 90%;
+    max-width: 1400px;
+    margin: 35px auto;
+    display: grid;
+    gap: 25px;
+}
+
+
+/* Create dark panels for each monitoring section. */
+section {
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+
+/* Style section headings with a cybersecurity-inspired prefix. */
+section h2 {
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+section h2::before {
+    content: "// ";
+    color: var(--red);
+}
+
+
+/* ==========================================================
+   3. SYSTEM STATUS
+   ========================================================== */
+
+/* Display firewall and server status cards side by side. */
+section:first-child {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+
+/* Keep the section heading above both status cards. */
+section:first-child h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+
+/* Style individual system status cards. */
+section:first-child > div {
+    padding: 20px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+
+/* Style the firewall and server labels. */
+section:first-child h3 {
+    margin-bottom: 10px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+
+/* Highlight system status values. */
+#firewall-status,
+#server-status {
+    color: var(--orange);
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+
+/* ==========================================================
+   4. PACKET STATISTICS
+   ========================================================== */
+
+/* Arrange packet counters in three columns. */
+section:nth-child(2) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+
+/* Keep the statistics heading above the counters. */
+section:nth-child(2) h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+
+/* Style individual packet statistic cards. */
+section:nth-child(2) > div {
+    padding: 22px;
+    text-align: center;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+
+/* Style packet counter labels. */
+section:nth-child(2) h3 {
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+
+/* Make packet counters easy to read. */
+#total-packets,
+#accepted-packets,
+#dropped-packets {
+    margin-top: 10px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+
+/* Use different colors to distinguish packet decisions. */
+#accepted-packets {
+    color: var(--green);
+}
+
+#dropped-packets {
+    color: var(--red);
+}
+
+
+/* ==========================================================
+   5. LIVE TRAFFIC MONITOR
+   ========================================================== */
+
+/* Allow horizontal scrolling when the traffic table is too wide. */
+section:nth-child(3) {
+    overflow-x: auto;
+}
+
+
+/* Display monitored packet details in a structured table. */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+
+/* Highlight table column headings. */
+th {
+    padding: 15px;
+    background: #1c1118;
+    color: var(--red);
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+
+/* Separate packet records for easier reading. */
+td {
+    padding: 15px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* Center the message displayed when no packets are available. */
+#traffic-table td[colspan] {
+    padding: 30px;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   6. ANIMATIONS
+   ========================================================== */
+
+/* Move the red scanning line across the header. */
+@keyframes scan {
+    from {
+        left: -40%;
+    }
+
+    to {
+        left: 100%;
+    }
+}
+
+
+/* Briefly shift the title overlay to create a glitch effect. */
+@keyframes glitch {
+    0%, 93%, 100% {
+        opacity: 0;
+        transform: translate(0);
+    }
+
+    94% {
+        opacity: 0.5;
+        transform: translate(2px, -1px);
+    }
+
+    95% {
+        opacity: 0;
+    }
+
+    96% {
+        opacity: 0.4;
+        transform: translate(-2px, 1px);
+    }
+
+    97% {
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================================
+   7. RESPONSIVE DESIGN
+   ========================================================== */
+
+/* Adapt dashboard cards and table to smaller screens. */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.7rem;
+    }
+
+    main {
+        width: 94%;
+    }
+
+    section:nth-child(2) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    table {
+        min-width: 680px;
+    }
+}
+
+
+/* Stack monitoring cards vertically on mobile devices. */
+@media (max-width: 480px) {
+    section:first-child,
+    section:nth-child(2) {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Disable animations for users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+    header::before,
+    header h1::after {
+        animation: none;
+    }
+}

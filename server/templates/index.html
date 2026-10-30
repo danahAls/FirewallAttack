@@ -1,0 +1,84 @@
+<!DOCTYPE html> <!-- Use HTML5 -->
+<html lang="en"> <!-- Set the page language -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Support text characters -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Support different screen sizes -->
+    <title>Secure Server Panel</title> <!-- Browser tab title -->
+
+    <!-- Load the server interface stylesheet. -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- Main container for the protected server interface. -->
+    <main class="server-container">
+
+        <!-- Display the server interface heading. -->
+        <header>
+            <p class="server-label">Internal Network / Protected Host</p>
+            <h1 class="server-title">SECURE SERVER</h1>
+            <p class="server-description">
+                Protected web server operating within the internal network.
+                Server availability is checked automatically.
+            </p>
+        </header>
+
+        <!-- Display the current server status. -->
+        <section class="server-panel">
+            <div class="status-row">
+                <!-- JavaScript updates the indicator based on the health check. -->
+                <span class="status-dot" id="status-dot"></span>
+
+                <!-- Keep this ID for the existing server status script. -->
+                <p id="server-status">Checking...</p>
+            </div>
+
+            <!-- Display the protected server's configuration. -->
+            <div class="server-details">
+
+                <!-- Internal IP address assigned to the server. -->
+                <div class="detail-card">
+                    <h3>Server IP Address</h3>
+                    <p>192.168.20.10</p>
+                </div>
+
+                <!-- Port used by the Flask web application. -->
+                <div class="detail-card">
+                    <h3>Listening Port</h3>
+                    <p>80 / TCP</p>
+                </div>
+
+                <!-- Application service running on the server. -->
+                <div class="detail-card">
+                    <h3>Web Service</h3>
+                    <p>Flask / HTTP</p>
+                </div>
+
+                <!-- Endpoint used to verify server availability. -->
+                <div class="detail-card">
+                    <h3>Health Check Endpoint</h3>
+                    <p>/health</p>
+                </div>
+
+                <!-- Network containing the protected server. -->
+                <div class="detail-card">
+                    <h3>Network</h3>
+                    <p>Internal Network</p>
+                </div>
+
+                <!-- Explain how the server is protected. -->
+                <div class="detail-card">
+                    <h3>Network Protection</h3>
+                    <p>Firewall Gateway</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Load JavaScript for automatic server status updates. -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

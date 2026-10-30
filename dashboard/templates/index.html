@@ -1,0 +1,89 @@
+<!DOCTYPE html> <!-- Use HTML5 -->
+<html lang="en"> <!-- Set the page language -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Support text characters -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Support different screen sizes -->
+    <title>Firewall Security Monitor</title> <!-- Browser tab title -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Load CSS -->
+</head>
+
+<body>
+    <!-- Dashboard heading -->
+    <header>
+        <h1 data-text="Firewall Security Monitor">Firewall Security Monitor</h1>
+        <p>Real-Time Network Traffic Monitoring</p>
+    </header>
+
+    <main>
+        <!-- Display the current system status -->
+        <section>
+            <h2>System Status</h2>
+
+            <div>
+                <h3>Firewall</h3>
+                <p id="firewall-status">Unknown</p> <!-- Updated when firewall monitoring is connected -->
+            </div>
+
+            <div>
+                <h3>Server</h3>
+                <p id="server-status">Unknown</p> <!-- Updated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Display packet counters -->
+        <section>
+            <h2>Packet Statistics</h2>
+
+            <div>
+                <h3>Total Packets</h3>
+                <p id="total-packets">0</p>
+            </div>
+
+            <div>
+                <h3>Accepted Packets</h3>
+                <p id="accepted-packets">0</p>
+            </div>
+
+            <div>
+                <h3>Dropped Packets</h3>
+                <p id="dropped-packets">0</p>
+            </div>
+
+            <!-- Display packets explicitly rejected by firewall rules. -->
+            <div>
+                <h3>Rejected Packets</h3>
+                <p id="rejected-packets">0</p>
+            </div>
+        </section>
+
+        <!-- Display monitored packets and firewall decisions -->
+        <section>
+            <h2>Live Traffic Monitor</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Source IP</th>
+                        <th>Destination IP</th>
+                        <th>Protocol</th>
+                        <th>Port</th>
+                        <th>Decision</th>
+                    </tr>
+                </thead>
+
+                <tbody id="traffic-table">
+                    <tr>
+                        <td colspan="6">Waiting for packets...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Load JavaScript for automatic updates -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
