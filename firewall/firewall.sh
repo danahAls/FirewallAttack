@@ -50,6 +50,11 @@ iptables -A FORWARD -p tcp ! --syn -m conntrack --ctstate NEW -j DROP
 iptables -A FORWARD -d "$SERVER" -p icmp --icmp-type echo-request \
          -m limit --limit 1/second --limit-burst 3 -j ACCEPT
 iptables -A FORWARD -d "$SERVER" -p icmp --icmp-type echo-request -j DROP
+
+# Planted misconfiguration
+# External TCP to port 8081 is redirected to the internal HR portal (9000)
+iptables -t nat -A PREROUTING -p tcp --dport 8081 -j DNAT --to-destination 192.168.20.10:9000
+iptables -A FORWARD -d 192.168.20.10 -p tcp --dport 9000 -j ACCEPT
  
 
 
