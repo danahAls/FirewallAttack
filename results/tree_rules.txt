@@ -1,0 +1,13 @@
+|--- count <= 3.50
+|   |--- flag_S <= 0.50
+|   |   |--- class: 0
+|   |--- flag_S >  0.50
+|   |   |--- src_is_self <= 0.50
+|   |   |   |--- class: 0
+|   |   |--- src_is_self >  0.50
+|   |   |   |--- dport <= 261.50
+|   |   |   |   |--- class: 1
+|   |   |   |--- dport >  261.50
+|   |   |   |   |--- class: 0
+|--- count >  3.50
+|   |--- class: 1
