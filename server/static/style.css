@@ -1,155 +1,591 @@
-/* Define the main colors used in the server interface. */
-:root {
-    --background: #090b10;
-    --panel: #131720;
-    --border: #303541;
-    --red: #ff344c;
-    --text: #f2f4f8;
-    --muted: #929aa9;
-    --green: #36d399;
-}
+/* TRIPLE 4 RECRUITMENT | EMPLOYEE PORTAL */
 
-/* Apply consistent sizing to all elements. */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-/* Style the main page background and typography. */
-body {
-    margin: 0;
+:root { /* Company color palette */
+    --background: #15191E;
+    --sidebar: #191F25;
+    --card: #252B32;
+    --surface: #1C2229;
+    --surface-light: #2D363E;
+    --teal: #30C4B5;
+    --teal-soft: rgba(48, 196, 181, 0.10);
+    --text: #E8EDF1;
+    --muted: #9DAAB5;
+    --border: #37434B;
+    --green: #22C55E;
+    --red: #EF4444;
+    --orange: #F59E0B;
+}
+
+html { /* Enable smooth navigation */
+    scroll-behavior: smooth;
+}
+
+body { /* Main portal appearance */
     min-height: 100vh;
-    background:
-        radial-gradient(circle at 50% 0%, #35111c 0%, transparent 45%),
-        var(--background);
+    background: var(--background);
     color: var(--text);
     font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
 }
 
-/* Center the server interface on the page. */
-.server-container {
-    width: min(900px, 90%);
-    margin: 0 auto;
-    padding: 70px 0;
+a { /* Remove default link styling */
+    color: inherit;
+    text-decoration: none;
 }
 
-/* Style the small heading above the main title. */
-.server-label {
-    color: var(--red);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+button { /* Match company typography */
+    font: inherit;
 }
 
-/* Style the main server title. */
-.server-title {
-    margin: 15px 0;
-    font-size: clamp(32px, 6vw, 58px);
+/* PORTAL LAYOUT */
+
+.portal-layout { /* Arrange sidebar and workspace */
+    display: grid;
+    grid-template-columns: 245px minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+.portal-sidebar { /* Company navigation */
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 28px 16px;
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+}
+
+.sidebar-brand { /* Company branding */
+    padding: 8px 12px 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand-logo { /* Company logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 16px;
+    background: var(--teal);
+    color: var(--background);
+    border-radius: 14px;
+    font-size: 1.35rem;
+    font-weight: 900;
+}
+
+.sidebar-brand h2 { /* Company name */
+    font-size: 1.25rem;
     font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.sidebar-brand p { /* Company industry */
+    margin-top: 3px;
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 600;
     letter-spacing: 2px;
 }
 
-/* Style the description under the title. */
-.server-description {
-    color: var(--muted);
-    line-height: 1.7;
+.sidebar-nav { /* Navigation links */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 28px;
 }
 
-/* Create the main server status panel. */
-.server-panel {
-    margin-top: 40px;
-    padding: 35px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--red);
-    border-radius: 12px;
-    box-shadow: 0 20px 60px #00000055;
-}
-
-/* Display the server status indicator and text together. */
-.status-row {
+.nav-link { /* Individual navigation item */
     display: flex;
     align-items: center;
     gap: 15px;
+    padding: 13px 15px;
+    color: var(--muted);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
 }
 
-/* Create the animated status indicator. */
-.status-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--muted);
+.nav-link:hover { /* Highlight navigation on hover */
+    background: var(--surface-light);
+    color: var(--text);
 }
 
-/* Animate the status indicator when the server is online. */
-.status-dot.online {
-    background: var(--green);
-    box-shadow: 0 0 15px var(--green);
-    animation: pulse 2s infinite;
+.nav-link.active { /* Highlight current navigation */
+    background: var(--teal-soft);
+    color: var(--teal);
+    border-color: rgba(48, 196, 181, 0.15);
 }
 
-/* Style the server status text. */
-#server-status {
-    font-size: 25px;
+.sidebar-footer { /* Sidebar company information */
+    margin-top: auto;
+    padding: 22px 12px 0;
+    border-top: 1px solid var(--border);
+}
+
+.sidebar-footer p {
+    color: var(--text);
+    font-size: 0.75rem;
     font-weight: 700;
 }
 
-/* Arrange server information into responsive cards. */
-.server-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 30px;
-}
-
-/* Style individual information cards. */
-.detail-card {
-    padding: 22px;
-    background: #0c1017;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-}
-
-/* Style the labels inside information cards. */
-.detail-card h3 {
-    margin: 0 0 12px;
+.sidebar-footer span {
     color: var(--muted);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-size: 0.72rem;
 }
 
-/* Style the information displayed inside cards. */
-.detail-card p {
-    margin: 0;
-    font-size: 19px;
+/* MAIN WORKSPACE */
+
+.portal-workspace { /* Portal workspace */
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.portal-topbar { /* Top navigation bar */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 100px;
+    padding: 22px 35px;
+    background: var(--sidebar);
+    border-bottom: 1px solid var(--border);
+}
+
+.page-heading h1 { /* Portal title */
+    font-size: 1.45rem;
+    font-weight: 750;
+}
+
+.page-heading p { /* Portal subtitle */
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.topbar-company { /* Company identity */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.company-icon { /* Company icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    background: var(--teal-soft);
+    color: var(--teal);
+    border: 1px solid rgba(48, 196, 181, 0.25);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.topbar-company strong {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.topbar-company p {
+    color: var(--muted);
+    font-size: 0.73rem;
+}
+
+.portal-content { /* Main portal content */
+    display: grid;
+    gap: 22px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 28px 35px 45px;
+}
+
+/* COMPANY WELCOME */
+
+.welcome-banner { /* Company welcome section */
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 175px;
+    padding: 30px;
+    background: linear-gradient(110deg, #1C4244, #203438 55%, #202A30);
+    border: 1px solid rgba(48, 196, 181, 0.25);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.welcome-content { /* Welcome message */
+    position: relative;
+    z-index: 1;
+    max-width: 75%;
+}
+
+.section-label { /* Company overview label */
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.welcome-content h2 { /* Welcome heading */
+    margin-top: 10px;
+    font-size: clamp(1.3rem, 2vw, 1.9rem);
+    font-weight: 750;
+}
+
+.welcome-content h2 span {
+    color: var(--teal);
+}
+
+.welcome-content p { /* Welcome description */
+    margin-top: 8px;
+    color: #C0CFD0;
+    font-size: 0.88rem;
+}
+
+.welcome-decoration { /* Decorative company number */
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(48, 196, 181, 0.13);
+    font-size: clamp(5rem, 10vw, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* COMPANY SERVICES */
+
+.portal-panel { /* Main content panels */
+    min-width: 0;
+    padding: 25px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.panel-heading { /* Panel heading layout */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 23px;
+}
+
+.panel-heading h2 { /* Panel title */
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.panel-heading p { /* Panel description */
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.83rem;
+}
+
+.panel-label { /* Section category label */
+    padding: 6px 11px;
+    background: var(--surface-light);
+    color: var(--muted);
+    border-radius: 7px;
+    font-size: 0.72rem;
+    white-space: nowrap;
+}
+
+.services-grid { /* Arrange employee services */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.service-card { /* Individual company service */
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 255px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.service-card:hover { /* Highlight service card */
+    border-color: rgba(48, 196, 181, 0.45);
+    transform: translateY(-3px);
+}
+
+.service-icon { /* Company service icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 18px;
+    background: var(--teal-soft);
+    color: var(--teal);
+    border-radius: 11px;
+    font-size: 1.45rem;
+}
+
+.service-card h3 { /* Service name */
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.service-card p { /* Service description */
+    margin-top: 10px;
+    margin-bottom: 22px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.service-button { /* Employee service button */
+    width: 100%;
+    margin-top: auto;
+    padding: 12px 15px;
+    background: var(--teal);
+    color: var(--background);
+    border: 1px solid var(--teal);
+    border-radius: 9px;
+    font-size: 0.85rem;
+    font-weight: 750;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.service-button:not(:disabled):hover { /* Active button hover */
+    background: #43D6C6;
+    transform: translateY(-2px);
+}
+
+.service-button:disabled { /* Services awaiting backend integration */
+    background: var(--surface-light);
+    color: var(--muted);
+    border-color: var(--border);
+    cursor: not-allowed;
+}
+
+/* PROTECTED SERVER */
+
+.server-status-panel { /* Server availability panel */
+    margin-bottom: 20px;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.status-row { /* Server status layout */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.status-dot { /* Server connection indicator */
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    background: var(--orange);
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.10);
+}
+
+.status-dot.online { /* Healthy server indicator */
+    background: var(--green);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.10);
+}
+
+.status-row h3 { /* Server status heading */
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+#server-status { /* Current server state */
+    margin-top: 4px;
+    color: var(--orange);
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.status-dot.online ~ div #server-status { /* Healthy server text */
+    color: var(--green);
+}
+
+.server-details { /* Server information grid */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.detail-card { /* Individual server detail */
+    min-width: 0;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.detail-card h3 { /* Server detail label */
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.detail-card p { /* Server detail value */
+    margin-top: 10px;
+    color: var(--text);
+    font-size: 1rem;
     font-weight: 700;
     overflow-wrap: anywhere;
 }
 
-/* Add a subtle pulsing animation to the online indicator. */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
+/* FOOTER */
 
-    50% {
-        opacity: 0.45;
-    }
+.portal-footer { /* Company portal footer */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: auto;
+    padding: 20px 35px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
 }
 
-/* Adjust the layout for smaller screens. */
-@media (max-width: 600px) {
-    .server-container {
-        padding: 45px 0;
-    }
+/* RESPONSIVE DESIGN */
 
-    .server-panel {
-        padding: 22px;
+@media (max-width: 1200px) { /* Medium desktop screens */
+    .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .server-details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) { /* Tablet screens */
+    .portal-layout {
+        grid-template-columns: 205px minmax(0, 1fr);
+    }
+
+    .portal-content {
+        padding: 25px;
+    }
+
+    .portal-topbar {
+        padding: 20px 25px;
+    }
+
+    .services-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) { /* Mobile navigation */
+    .portal-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-sidebar {
+        position: static;
+        height: auto;
+        padding: 15px;
+    }
+
+    .sidebar-brand {
+        padding: 5px 5px 15px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 15px;
+    }
+
+    .nav-link {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .portal-topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .portal-content {
+        padding: 18px;
+        gap: 18px;
+    }
+
+    .welcome-content {
+        max-width: 100%;
+    }
+
+    .welcome-decoration {
+        display: none;
+    }
+
+    .panel-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .portal-footer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) { /* Smaller mobile screens */
+    .portal-panel {
+        padding: 18px;
+    }
+
+    .services-grid,
+    .server-details {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        min-height: 220px;
+    }
+
+    .portal-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) { /* Accessibility preferences */
+    html {
+        scroll-behavior: auto;
+    }
+
+    .nav-link,
+    .service-card,
+    .service-button {
+        transition: none;
     }
 }

@@ -9,9 +9,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py .
+COPY hr_portal.py .
 
 # Copy the protected web server interface.
 COPY templates/ ./templates/
 COPY static/ ./static/
 
-CMD ["python", "app.py"]
+CMD ["python", "app.py", "hr_portal.py"]

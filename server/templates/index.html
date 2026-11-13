@@ -4,81 +4,176 @@
 <head>
     <meta charset="UTF-8"> <!-- Support text characters -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Support different screen sizes -->
-    <title>Secure Server Panel</title> <!-- Browser tab title -->
-
-    <!-- Load the server interface stylesheet. -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>TRIPLE 4 RECRUITMENT | Employee Portal</title> <!-- Browser tab title -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Load server stylesheet -->
 </head>
 
 <body>
-    <!-- Main container for the protected server interface. -->
-    <main class="server-container">
+    <div class="portal-layout">
 
-        <!-- Display the server interface heading. -->
-        <header>
-            <p class="server-label">Internal Network / Protected Host</p>
-            <h1 class="server-title">SECURE SERVER</h1>
-            <p class="server-description">
-                Protected web server operating within the internal network.
-                Server availability is checked automatically.
-            </p>
-        </header>
-
-        <!-- Display the current server status. -->
-        <section class="server-panel">
-            <div class="status-row">
-                <!-- JavaScript updates the indicator based on the health check. -->
-                <span class="status-dot" id="status-dot"></span>
-
-                <!-- Keep this ID for the existing server status script. -->
-                <p id="server-status">Checking...</p>
+        <aside class="portal-sidebar"> <!-- Company navigation -->
+            <div class="sidebar-brand">
+                <div class="brand-logo">444</div>
+                <h2>TRIPLE 4</h2>
+                <p>RECRUITMENT</p>
             </div>
 
-            <!-- Display the protected server's configuration. -->
-            <div class="server-details">
+            <nav class="sidebar-nav">
+                <a href="#home" class="nav-link active">⌂ <span>Overview</span></a>
+                <a href="#employee-services" class="nav-link">▦ <span>Employee Services</span></a>
+                <a href="#server-information" class="nav-link">⬡ <span>Server Information</span></a>
+            </nav>
 
-                <!-- Internal IP address assigned to the server. -->
-                <div class="detail-card">
-                    <h3>Server IP Address</h3>
-                    <p>192.168.20.10</p>
-                </div>
-
-                <!-- Port used by the Flask web application. -->
-                <div class="detail-card">
-                    <h3>Listening Port</h3>
-                    <p>80 / TCP</p>
-                </div>
-
-                <!-- Application service running on the server. -->
-                <div class="detail-card">
-                    <h3>Web Service</h3>
-                    <p>Flask / HTTP</p>
-                </div>
-
-                <!-- Endpoint used to verify server availability. -->
-                <div class="detail-card">
-                    <h3>Health Check Endpoint</h3>
-                    <p>/health</p>
-                </div>
-
-                <!-- Network containing the protected server. -->
-                <div class="detail-card">
-                    <h3>Network</h3>
-                    <p>Internal Network</p>
-                </div>
-
-                <!-- Explain how the server is protected. -->
-                <div class="detail-card">
-                    <h3>Network Protection</h3>
-                    <p>Firewall Gateway</p>
-                </div>
-
+            <div class="sidebar-footer">
+                <p>TRIPLE 4 RECRUITMENT</p>
+                <span>Connecting Talent with Opportunity.</span>
             </div>
-        </section>
-    </main>
+        </aside>
 
-    <!-- Load JavaScript for automatic server status updates. -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <div class="portal-workspace">
+
+            <header class="portal-topbar"> <!-- Portal header -->
+                <div class="page-heading">
+                    <h1>Employee Portal</h1>
+                    <p>Company Services & Protected Server Access</p>
+                </div>
+
+                <div class="topbar-company">
+                    <div class="company-icon">444</div>
+                    <div>
+                        <strong>TRIPLE 4 RECRUITMENT</strong>
+                        <p>Internal Company Portal</p>
+                    </div>
+                </div>
+            </header>
+
+            <main class="portal-content">
+
+                <section class="welcome-banner" id="home"> <!-- Company welcome -->
+                    <div class="welcome-content">
+                        <span class="section-label">WELCOME TO TRIPLE 4</span>
+                        <h2>Connecting Talent with <span>Opportunity.</span></h2>
+                        <p>
+                            Access company services through our protected internal network.
+                            Monitor service availability and explore employee resources.
+                        </p>
+                    </div>
+
+                    <div class="welcome-decoration">444</div>
+                </section>
+
+                <section class="portal-panel" id="employee-services"> <!-- Employee services -->
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Employee Services</h2>
+                            <p>Access available company resources and internal services.</p>
+                        </div>
+                        <span class="panel-label">COMPANY SERVICES</span>
+                    </div>
+
+                    <div class="services-grid">
+
+                        <article class="service-card">
+                            <div class="service-icon">▦</div>
+                            <h3>Company Information</h3>
+                            <p>
+                                View company information and general recruitment services.
+                            </p>
+                            <button type="button" id="company-info-btn" class="service-button" disabled>
+                                Coming Soon
+                            </button>
+                        </article>
+
+                        <article class="service-card">
+                            <div class="service-icon">♙</div>
+                            <h3>Employee Directory</h3>
+                            <p>
+                                Access the authorized employee directory and staff information.
+                            </p>
+                            <button type="button" id="employee-directory-btn" class="service-button" disabled>
+                                Coming Soon
+                            </button>
+                        </article>
+
+                        <article class="service-card">
+                            <div class="service-icon">⬡</div>
+                            <h3>Service Availability</h3>
+                            <p>
+                                Verify the availability of internal company services.
+                            </p>
+                            <button type="button" id="service-check-btn" class="service-button" disabled>
+                                Coming Soon
+                            </button>
+                        </article>
+
+                    </div>
+                </section>
+
+                <section class="portal-panel" id="server-information"> <!-- Protected server information -->
+                    <div class="panel-heading">
+                        <div>
+                            <h2>Protected Server</h2>
+                            <p>Internal network service and connectivity information.</p>
+                        </div>
+                        <span class="panel-label">SYSTEM INFORMATION</span>
+                    </div>
+
+                    <div class="server-status-panel">
+                        <div class="status-row">
+                            <span class="status-dot" id="status-dot"></span>
+                            <div>
+                                <h3>Server Availability</h3>
+                                <p id="server-status">Checking...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="server-details">
+
+                        <div class="detail-card">
+                            <h3>Server IP Address</h3>
+                            <p>192.168.20.10</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <h3>Listening Port</h3>
+                            <p>80 / TCP</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <h3>Web Service</h3>
+                            <p>Flask / HTTP</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <h3>Health Check Endpoint</h3>
+                            <p>/health</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <h3>Network</h3>
+                            <p>Internal Network</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <h3>Network Protection</h3>
+                            <p>Firewall Gateway</p>
+                        </div>
+
+                    </div>
+                </section>
+
+            </main>
+
+            <footer class="portal-footer">
+                <p>© TRIPLE 4 RECRUITMENT</p>
+                <span>Protected Internal Company Network</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- Load server JavaScript -->
 </body>
 
 </html>
