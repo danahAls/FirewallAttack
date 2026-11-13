@@ -1,88 +1,393 @@
-<!DOCTYPE html> <!-- Use HTML5 -->
-<html lang="en"> <!-- Set the page language -->
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8"> <!-- Support text characters -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Support different screen sizes -->
-    <title>Firewall Security Monitor</title> <!-- Browser tab title -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Load CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triple 4 Recruitment | Company Security Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <!-- Dashboard heading -->
-    <header>
-        <h1 data-text="Firewall Security Monitor">Firewall Security Monitor</h1>
-        <p>Real-Time Network Traffic Monitoring</p>
-    </header>
+    <div class="app-layout">
 
-    <main>
-        <!-- Display the current system status -->
-        <section>
-            <h2>System Status</h2>
-
-            <div>
-                <h3>Firewall</h3>
-                <p id="firewall-status">Unknown</p> <!-- Updated when firewall monitoring is connected -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo">444</div>
+                <h2>TRIPLE 4</h2>
+                <p>RECRUITMENT</p>
             </div>
 
-            <div>
-                <h3>Server</h3>
-                <p id="server-status">Unknown</p> <!-- Updated by JavaScript -->
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active">⌂ <span>Dashboard</span></a>
+                <a href="#employee-services" class="nav-link">♧ <span>Employee Services</span></a>
+                <a href="#normal-traffic" class="nav-link">↗ <span>Normal Traffic</span></a>
+                <a href="#security-monitoring" class="nav-link">⬡ <span>Security Monitoring</span></a>
+                <a href="#network-traffic" class="nav-link">▥ <span>Network Traffic</span></a>
+                <a href="#security-alerts" class="nav-link">♧ <span>Security Alerts</span></a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>TRIPLE 4 RECRUITMENT</p>
+                <span>Company Security System</span>
             </div>
-        </section>
+        </aside>
 
-        <!-- Display packet counters -->
-        <section>
-            <h2>Packet Statistics</h2>
+        <div class="workspace">
 
-            <div>
-                <h3>Total Packets</h3>
-                <p id="total-packets">0</p>
-            </div>
+            <header class="topbar">
+                <div class="page-heading">
+                    <h1>Company Security Dashboard</h1>
+                    <p>Monitoring network activity and protecting company services.</p>
+                </div>
 
-            <div>
-                <h3>Accepted Packets</h3>
-                <p id="accepted-packets">0</p>
-            </div>
+                <div class="topbar-company">
+                    <div class="company-icon">444</div>
+                    <div>
+                        <strong>Triple 4 Recruitment</strong>
+                        <p>HR &amp; Talent Acquisition</p>
+                    </div>
+                </div>
+            </header>
 
-            <div>
-                <h3>Dropped Packets</h3>
-                <p id="dropped-packets">0</p>
-            </div>
+            <main id="dashboard" class="dashboard-content">
 
-            <!-- Display packets explicitly rejected by firewall rules. -->
-            <div>
-                <h3>Rejected Packets</h3>
-                <p id="rejected-packets">0</p>
-            </div>
-        </section>
+                <section class="welcome-banner">
+                    <div class="welcome-content">
+                        <span class="section-label">COMPANY OVERVIEW</span>
+                        <h2>Welcome to <span>Triple 4 Recruitment</span></h2>
+                        <p>A recruitment platform supporting employees and HR operations.</p>
+                    </div>
 
-        <!-- Display monitored packets and firewall decisions -->
-        <section>
-            <h2>Live Traffic Monitor</h2>
+                    <div class="welcome-decoration">444</div>
+                </section>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Time</th>
-                        <th>Source IP</th>
-                        <th>Destination IP</th>
-                        <th>Protocol</th>
-                        <th>Port</th>
-                        <th>Decision</th>
-                    </tr>
-                </thead>
+                <div id="security-monitoring" class="overview-grid">
 
-                <tbody id="traffic-table">
-                    <tr>
-                        <td colspan="6">Waiting for packets...</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
+                    <section class="dashboard-panel system-panel">
+                        <div class="panel-heading">
+                            <h2>System Status</h2>
+                            <span class="panel-label">Infrastructure</span>
+                        </div>
 
-    <!-- Load JavaScript for automatic updates -->
+                        <div class="status-grid">
+
+                            <div class="status-card">
+                                <div class="status-card-heading">
+                                    <span class="status-icon">⬡</span>
+                                    <h3>Firewall</h3>
+                                </div>
+                                <p id="firewall-status" class="status-value">Checking...</p>
+                            </div>
+
+                            <div class="status-card">
+                                <div class="status-card-heading">
+                                    <span class="status-icon">▤</span>
+                                    <h3>Server</h3>
+                                </div>
+                                <p id="server-status" class="status-value">Checking...</p>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section class="dashboard-panel statistics-panel">
+                        <div class="panel-heading">
+                            <h2>Packet Statistics</h2>
+                            <span class="panel-label">Firewall Metrics</span>
+                        </div>
+
+                        <div class="statistics-grid">
+
+                            <div class="stat-card total-card">
+                                <h3>Total Packets</h3>
+                                <p id="total-packets">--</p>
+                            </div>
+
+                            <div class="stat-card accepted-card">
+                                <h3>Accepted Packets</h3>
+                                <p id="accepted-packets">--</p>
+                            </div>
+
+                            <div class="stat-card dropped-card">
+                                <h3>Dropped Packets</h3>
+                                <p id="dropped-packets">--</p>
+                            </div>
+
+                            <div class="stat-card rejected-card">
+                                <h3>Rejected Packets</h3>
+                                <p id="rejected-packets">--</p>
+                            </div>
+
+                        </div>
+                    </section>
+
+                </div>
+
+                <div id="network-traffic" class="analytics-grid">
+
+                    <section class="dashboard-panel traffic-chart-panel">
+                        <div class="panel-heading">
+                            <h2>Network Traffic</h2>
+                            <span class="panel-label">Monitoring</span>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="traffic-chart"></canvas>
+                            <p class="chart-placeholder">
+                                Traffic history will appear when monitoring is connected.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="dashboard-panel distribution-panel">
+                        <div class="panel-heading">
+                            <h2>Traffic Distribution</h2>
+                            <span class="panel-label">Packet Decisions</span>
+                        </div>
+
+                        <div class="distribution-content">
+
+                            <div class="distribution-chart">
+                                <canvas id="distribution-chart"></canvas>
+                                <p class="chart-placeholder">Waiting for chart data...</p>
+                            </div>
+
+                            <div class="distribution-legend">
+
+                                <div class="legend-row">
+                                    <span class="legend-dot accepted"></span>
+                                    <span>Accepted</span>
+                                    <strong id="accepted-percentage">--</strong>
+                                </div>
+
+                                <div class="legend-row">
+                                    <span class="legend-dot dropped"></span>
+                                    <span>Dropped</span>
+                                    <strong id="dropped-percentage">--</strong>
+                                </div>
+
+                                <div class="legend-row">
+                                    <span class="legend-dot rejected"></span>
+                                    <span>Rejected</span>
+                                    <strong id="rejected-percentage">--</strong>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <div class="monitoring-grid">
+
+                    <section class="dashboard-panel traffic-table-panel">
+                        <div class="panel-heading">
+                            <h2>Live Traffic Monitor</h2>
+                            <span class="panel-label">Packet Events</span>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Source IP</th>
+                                        <th>Destination IP</th>
+                                        <th>Protocol</th>
+                                        <th>Port</th>
+                                        <th>Decision</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="traffic-table-body">
+                                    <tr>
+                                        <td colspan="6">Loading real packet events...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="security-alerts" class="dashboard-panel alerts-panel">
+                        <div class="panel-heading">
+                            <h2>Security Alerts</h2>
+                            <span class="panel-label">Security Events</span>
+                        </div>
+
+                        <div id="security-alerts-list" class="alerts-content">
+                            <div class="alert-placeholder">
+                                <div class="alert-icon">◎</div>
+                                <h3>Loading Security Events</h3>
+                                <p>Retrieving recorded firewall events...</p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <section id="employee-services" class="dashboard-panel employee-panel">
+                    <div class="panel-heading">
+                        <h2>Employee Services</h2>
+                        <span class="panel-label">Normal Behavior</span>
+                    </div>
+
+                    <div class="employee-services-grid">
+
+                        <div class="employee-service-card">
+                            <div class="employee-service-icon">▦</div>
+                            <h3>Company Information</h3>
+                            <p>View company details and recruitment information.</p>
+
+                            <button
+                                type="button"
+                                class="employee-service-button"
+                                id="company-info-btn"
+                                disabled>
+                                Coming Soon
+                            </button>
+                        </div>
+
+                        <div class="employee-service-card">
+                            <div class="employee-service-icon">♙</div>
+                            <h3>Employee Directory</h3>
+                            <p>Access the fictional company employee directory.</p>
+
+                            <button
+                                type="button"
+                                class="employee-service-button"
+                                id="employee-directory-btn"
+                                disabled>
+                                Coming Soon
+                            </button>
+                        </div>
+
+                        <div class="employee-service-card">
+                            <div class="employee-service-icon">⬡</div>
+                            <h3>Service Availability</h3>
+                            <p>Check the availability of company services.</p>
+
+                            <button
+                                type="button"
+                                class="employee-service-button"
+                                id="service-check-btn"
+                                disabled>
+                                Coming Soon
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="employee-service-result"
+                        class="employee-service-result"
+                        hidden>
+                    </div>
+                </section>
+
+                <!-- Normal Traffic Simulation -->
+                <section id="normal-traffic" class="dashboard-panel normal-traffic-panel">
+
+                    <div class="panel-heading">
+                        <h2>Normal Traffic Simulation</h2>
+                        <span class="panel-label">Authorized Network Activity</span>
+                    </div>
+
+                    <p class="normal-traffic-description">
+                        Generate legitimate employee HTTP requests and monitor
+                        how the firewall handles traffic to protected company services.
+                    </p>
+
+                    <div class="normal-traffic-controls">
+
+                        <div class="normal-traffic-config">
+                            <label for="normal-traffic-count">NUMBER OF REQUESTS</label>
+                            <input
+                                type="number"
+                                id="normal-traffic-count"
+                                min="1"
+                                max="20"
+                                value="10">
+                        </div>
+
+                        <button
+                            type="button"
+                            class="employee-service-button normal-traffic-button"
+                            id="send-normal-traffic-btn">
+                            ▶ SEND NORMAL TRAFFIC
+                        </button>
+
+                    </div>
+
+                    <p id="normal-traffic-message" class="normal-traffic-message">
+                        Ready to generate normal network traffic.
+                    </p>
+
+                    <div class="normal-traffic-stats">
+
+                        <div class="normal-traffic-stat">
+                            <span>REQUESTS SENT</span>
+                            <strong id="normal-requests-sent">0</strong>
+                        </div>
+
+                        <div class="normal-traffic-stat">
+                            <span>SUCCESSFUL RESPONSES</span>
+                            <strong id="normal-requests-success">0</strong>
+                        </div>
+
+                        <div class="normal-traffic-stat">
+                            <span>FAILED REQUESTS</span>
+                            <strong id="normal-requests-failed">0</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="panel-heading normal-traffic-results-heading">
+                        <h2>Normal Traffic Results</h2>
+                        <span class="panel-label">HTTP Request Log</span>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Request</th>
+                                    <th>Service</th>
+                                    <th>Source IP</th>
+                                    <th>Destination IP</th>
+                                    <th>Port</th>
+                                    <th>HTTP Status</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="normal-traffic-results-body">
+                                <tr>
+                                    <td colspan="7">
+                                        No normal traffic simulation has been run.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="normal-traffic-note">
+                        HTTP results show server responses. Firewall ACCEPT and DROP
+                        decisions are recorded separately in the Live Traffic Monitor.
+                    </p>
+
+                </section>
+
+            </main>
+
+            <footer class="dashboard-footer">
+                <p>© TRIPLE 4 RECRUITMENT</p>
+                <span>Company Network Security Monitoring System</span>
+            </footer>
+
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 

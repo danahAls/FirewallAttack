@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10090B">
+    <title>Prime HR Consulting | Red Team Command Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">PH</div>
+                <div class="brand-text">
+                    <h2>Prime HR Consulting</h2>
+                    <p>RED TEAM OPERATIONS</p>
+                </div>
+            </div>
+
+            <div class="environment-badge">
+                <span class="status-dot"></span>
+                AUTHORIZED VIRTUAL LAB
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-link active">
+                    <span class="nav-icon">⌂</span><span>Dashboard</span>
+                </a>
+                <a href="#attack-control" class="nav-link">
+                    <span class="nav-icon">◎</span><span>Attack Simulation</span>
+                </a>
+                <a href="#learning-analytics" class="nav-link">
+                    <span class="nav-icon">▥</span><span>ML Analytics</span>
+                </a>
+                <a href="#hr-access-results" class="nav-link">
+                    <span class="nav-icon">⚑</span><span>HR Access Results</span>
+                </a>
+                <a href="#attack-terminal" class="nav-link">
+                    <span class="nav-icon">&gt;_</span><span>Live Terminal</span>
+                </a>
+                <a href="#probe-results" class="nav-link">
+                    <span class="nav-icon">☷</span><span>Probe Results</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="footer-label">SECURITY ENVIRONMENT</span>
+                <strong>VIRTUAL ATTACK LAB</strong>
+                <p>Isolated Docker Network</p>
+            </div>
+        </aside>
+
+        <div class="workspace">
+
+            <!-- Header -->
+            <header class="topbar">
+                <div class="page-heading">
+                    <span class="header-logo">◈</span>
+                    <div>
+                        <h1>Prime HR Consulting</h1>
+                        <p>RED TEAM COMMAND CENTER</p>
+                    </div>
+                </div>
+
+                <div class="topbar-actions">
+                    <span class="virtual-lab-badge">◉ VIRTUAL ATTACK LAB</span>
+                    <div class="topbar-status">
+                        <span class="topbar-status-dot"></span>
+                        <span id="interface-status">CONNECTING</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-content">
+
+                <!-- System Overview -->
+                <section id="overview" class="overview-section">
+                    <div class="section-heading">
+                        <div>
+                            <span class="eyebrow">RED TEAM / SYSTEM OVERVIEW</span>
+                            <h2>Attack Simulation Environment</h2>
+                            <p>Controlled security testing powered by Epsilon-Greedy learning.</p>
+                        </div>
+                        <span class="lab-badge">AUTHORIZED SIMULATION</span>
+                    </div>
+
+                    <div class="target-grid">
+                        <div class="target-card">
+                            <span class="target-icon">◎</span>
+                            <span class="target-label">TARGET SERVER</span>
+                            <strong>192.168.20.10</strong>
+                            <span class="target-description">Internal Network</span>
+                        </div>
+
+                        <div class="target-card">
+                            <span class="target-icon">◈</span>
+                            <span class="target-label">ATTACKER NODE</span>
+                            <strong>192.168.10.3</strong>
+                            <span class="target-description">External Network</span>
+                        </div>
+
+                        <div class="target-card">
+                            <span class="target-icon">⛨</span>
+                            <span class="target-label">FIREWALL</span>
+                            <strong>192.168.10.2</strong>
+                            <span class="target-description">Network Gateway</span>
+                        </div>
+
+                        <div class="target-card">
+                          <span class="target-icon">◉</span>
+                          <span class="target-label">LEARNING ALGORITHM</span>
+                          <strong class="algorithm-name">Multi-Armed Bandit (MAB)</strong>
+                          <span class="target-description">Strategy: Epsilon-Greedy</span>
+                          <span class="target-description">Packet Tool: Scapy</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Attack Control and Progress -->
+                <div class="command-grid">
+
+                    <section id="attack-control" class="panel control-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">RED TEAM OPERATIONS</span>
+                                <h2><span class="section-icon">⚡</span> Attack Control</h2>
+                            </div>
+                            <span id="run-status" class="status-badge idle">IDLE</span>
+                        </div>
+
+                        <p class="panel-description">
+                            Configure the learning experiment or execute the complete authorized attack simulation.
+                        </p>
+
+                        <form id="learning-form" class="control-form">
+                            <div class="configuration-grid">
+                                <div class="input-group">
+                                    <label for="steps-input">PROBE STEPS</label>
+                                    <input id="steps-input" name="steps" type="number" min="1" max="400" value="100" required>
+                                    <small>Maximum 400 probes</small>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="epsilon-input">EPSILON (ε)</label>
+                                    <input id="epsilon-input" name="epsilon" type="number" min="0" max="1" step="0.05" value="0.2" required>
+                                    <small>Exploration probability</small>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="seed-input">RANDOM SEED</label>
+                                    <input id="seed-input" name="seed" type="number" min="0" max="1000000" value="0" required>
+                                    <small>Reproducible experiment</small>
+                                </div>
+                            </div>
+
+                            <div class="attack-actions">
+                                <button id="start-learning-btn" class="start-button" type="submit">
+                                    <span class="button-icon">▶</span> START LEARNING
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="full-attack-action">
+                            <button id="full-attack-btn" class="full-attack-button" type="button">
+                                <span class="button-icon">⚡</span> RUN FULL ATTACK
+                            </button>
+                            <p class="attack-action-description">
+                                Execute 400 learning probes, investigate discovered services, and verify simulated HR data access.
+                            </p>
+                        </div>
+
+                        <p id="control-message" class="control-message" role="status">
+                            System ready. Select an experiment to begin.
+                        </p>
+                    </section>
+
+                    <section class="panel progress-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <span class="eyebrow">LIVE EXECUTION</span>
+                                <h2><span class="section-icon">⚑</span> Attack Progress</h2>
+                            </div>
+                            <div class="progress-heading">
+                                <strong id="progress-percentage">0%</strong>
+                            </div>
+                        </div>
+
+                        <div class="progress-section">
+                            <div id="progress-track" class="progress-track" role="progressbar"
+                                 aria-label="Experiment progress" aria-valuemin="0"
+                                 aria-valuemax="100" aria-valuenow="0">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+
+                            <div class="progress-details">
+                                <span>COMPLETED PROBES</span>
+                                <strong><span id="completed-steps">0</span> / <span id="total-steps">0</span></strong>
+                            </div>
+
+                            <div class="progress-details">
+                                <span>RUN ID</span>
+                                <strong id="run-id">—</strong>
+                            </div>
+
+                            <p class="progress-note">◉ Progress represents the learning probe phase.</p>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Machine Learning Analytics -->
+                <section id="learning-analytics" class="analytics-section">
+                    <div class="section-heading compact">
+                        <div>
+                            <span class="eyebrow">EPSILON-GREEDY EXPERIMENT</span>
+                            <h2><span class="section-icon">▥</span> ML Analytics</h2>
+                        </div>
+                        <span class="panel-tag">LIVE EXPERIMENT DATA</span>
+                    </div>
+
+                    <div class="analytics-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">TOTAL PROBES</span>
+                            <strong id="metric-probes">0</strong>
+                            <p>Recorded experiment attempts</p>
+                        </div>
+
+                        <div class="metric-card">
+                            <span class="metric-label">REPLIES RECEIVED</span>
+                            <strong id="metric-replies">0</strong>
+                            <p>Probes with observed responses</p>
+                        </div>
+
+                        <div class="metric-card">
+                            <span class="metric-label">NO REPLY</span>
+                            <strong id="metric-no-reply">0</strong>
+                            <p>Probes without a response</p>
+                        </div>
+
+                        <div class="metric-card discovery-card">
+                            <span class="metric-label">HIDDEN PORT 8081</span>
+                            <strong id="metric-discovery">NOT DETECTED</strong>
+                            <p id="discovery-detail">No SYN-ACK recorded yet</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- HR Access Results -->
+                <section id="hr-access-results" class="panel hr-results-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">SIMULATED CONFIDENTIAL DATA</span>
+                            <h2><span class="section-icon">♙</span> HR Access Results</h2>
+                        </div>
+                        <span id="hr-access-status" class="status-badge idle">NOT TESTED</span>
+                    </div>
+
+                    <p class="panel-description">
+                        Verified results from the current full attack experiment.
+                        Port discovery alone does not confirm HR data access.
+                    </p>
+
+                    <div class="target-grid hr-stats-grid">
+                        <div class="target-card">
+                            <span class="target-label">DISCOVERED PORTS</span>
+                            <strong id="hr-discovered-ports">—</strong>
+                            <span class="target-description">TCP SYN-ACK observations</span>
+                        </div>
+
+                        <div class="target-card">
+                            <span class="target-label">INVESTIGATED PORTS</span>
+                            <strong id="hr-investigated-ports">—</strong>
+                            <span class="target-description">Investigated services</span>
+                        </div>
+
+                        <div class="target-card">
+                            <span class="target-label">HR DATA ACCESS</span>
+                            <strong id="hr-access-confirmed">NOT TESTED</strong>
+                            <span class="target-description">Verified HR response required</span>
+                        </div>
+
+                        <div class="target-card">
+                            <span class="target-label">TARGET RESOURCE</span>
+                            <strong class="algorithm-name">/salaries</strong>
+                            <span class="target-description">Simulated employee records</span>
+                        </div>
+                    </div>
+
+                    <div class="table-container hr-attempts-table">
+                        <table class="results-table" aria-label="HR access attempts">
+                            <thead>
+                                <tr>
+                                    <th>PORT</th>
+                                    <th>RESOURCE</th>
+                                    <th>HTTP STATUS</th>
+                                    <th>ACCESS CONFIRMED</th>
+                                </tr>
+                            </thead>
+                            <tbody id="hr-access-attempts-body">
+                                <tr>
+                                    <td colspan="4" class="empty-table">No full attack has been run.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="terminal-window hr-records-window">
+                        <div class="terminal-toolbar">
+                            <span>SIMULATED EMPLOYEE RECORDS</span>
+                            <span class="terminal-label">VERIFIED RESPONSE ONLY</span>
+                        </div>
+                        <pre id="hr-records-output" class="terminal-output">No confirmed HR records retrieved.</pre>
+                    </div>
+                </section>
+
+                <!-- Live Terminal -->
+                <section id="attack-terminal" class="panel terminal-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">SYSTEM EXECUTION LOGS</span>
+                            <h2><span class="section-icon">&gt;_</span> Live Terminal</h2>
+                        </div>
+                        <span class="terminal-indicator">
+                            <span class="status-dot"></span> PYTHON OUTPUT
+                        </span>
+                    </div>
+
+                    <div class="terminal-window">
+                        <div class="terminal-toolbar">
+                            <div class="terminal-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span>primehr@attacker:~</span>
+                            <span class="terminal-label">LEARNER LOGS</span>
+                        </div>
+                        <pre id="terminal-output" class="terminal-output" aria-live="off">$ Prime HR Consulting - Red Team Console
+$ System ready. Choose an experiment to begin...</pre>
+                    </div>
+                </section>
+
+                <!-- Probe Results -->
+                <section id="probe-results" class="panel results-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <span class="eyebrow">NETWORK PROBE RECORDS</span>
+                            <h2><span class="section-icon">☷</span> Probe Results</h2>
+                        </div>
+                        <span class="panel-tag">LIVE DATA</span>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="results-table" aria-label="Probe results">
+                            <thead>
+                                <tr>
+                                    <th>STEP</th>
+                                    <th>PROTOCOL</th>
+                                    <th>PORT</th>
+                                    <th>FLAGS</th>
+                                    <th>SOURCE</th>
+                                    <th>REPLY</th>
+                                    <th>REWARD</th>
+                                </tr>
+                            </thead>
+                            <tbody id="probe-results-body">
+                                <tr>
+                                    <td colspan="7" class="empty-table">No experiment records available.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="results-note">
+                        Responses are observations from network probes.
+                        A received reply does not necessarily prove a firewall bypass.
+                    </p>
+                </section>
+
+            </main>
+
+            <footer class="dashboard-footer">
+                <span>PRIME HR CONSULTING | RED TEAM COMMAND CENTER</span>
+                <span>AUTHORIZED VIRTUAL SECURITY TESTING</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
